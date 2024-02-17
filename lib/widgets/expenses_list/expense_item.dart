@@ -9,35 +9,45 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 5),
+      padding: const EdgeInsets.only(top: 14, left: 10, right: 10),
       child: Card(
+        color: const Color(0xffE0E1DD),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
-          child: Column(children: [
-            Text(
-              expense.title,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text('Rs ${expense.amount.toStringAsFixed(2)}'),
-                const Spacer(),
-                Row(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                categoryIcons[expense.category],
+                color: expense.categoryColor,
+                size: 50,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(categoryIcons[expense.category],
-                        color: expense.categoryColor),
-                    const SizedBox(width: 5),
-                    Text(expense.formatedDate),
+                    Text(
+                      expense.title,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      expense.formatedDate,
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.black45),
+                    ),
                   ],
                 ),
-              ],
-            )
-          ]),
+              ),
+              const Spacer(), // Add space between date and right edge
+              Text(
+                'Rs ${expense.amount.toStringAsFixed(2)}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );

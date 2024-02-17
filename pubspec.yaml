@@ -38,6 +38,7 @@ dependencies:
   uuid: ^4.3.3
   intl: ^0.19.0
   fl_chart: ^0.66.1
+  floating_bottom_navigation_bar: ^1.5.2
 
 dev_dependencies:
   flutter_test:

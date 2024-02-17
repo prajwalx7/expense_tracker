@@ -23,20 +23,20 @@ class MyPieChart extends StatelessWidget {
       height: 200,
       width: 200,
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(193, 214, 233, 1),
+        color: Color(0xffE0E1DD),
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
             spreadRadius: -10,
             blurRadius: 17,
             offset: Offset(-5, -5),
-            color: Colors.white,
+            color: Colors.black45,
           ),
           BoxShadow(
             spreadRadius: -2,
             blurRadius: 10,
             offset: Offset(7, 7),
-            color: Color.fromRGBO(146, 182, 216, 1),
+            color: Color.fromARGB(255, 188, 189, 184),
           )
         ],
       ),
@@ -59,7 +59,7 @@ class MyPieChart extends StatelessWidget {
             child: Container(
               height: 90,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(193, 214, 233, 1),
+                color: const Color(0xffE0E1DD),
                 shape: BoxShape.circle,
                 boxShadow: [
                   const BoxShadow(

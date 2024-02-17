@@ -17,13 +17,13 @@ class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [
     ExpenseModel(
       amount: 150,
-      title: 'lunch',
+      title: 'Lunch',
       date: DateTime.now(),
       category: Category.food,
     ),
     ExpenseModel(
       amount: 300,
-      title: 'grocery',
+      title: 'Grocery',
       date: DateTime.now(),
       category: Category.leisure,
     ),
@@ -41,7 +41,19 @@ class _ExpensesState extends State<Expenses> {
     ),
     ExpenseModel(
       amount: 500,
-      title: 'keyboard',
+      title: 'Keyboard',
+      date: DateTime.now(),
+      category: Category.work,
+    ),
+    ExpenseModel(
+      amount: 300,
+      title: 'Hotel',
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+    ExpenseModel(
+      amount: 1000,
+      title: 'Fees',
       date: DateTime.now(),
       category: Category.work,
     ),
@@ -94,7 +106,10 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     Widget mainContent = const Center(
-      child: Text('No data available!'),
+      child: Text(
+        'No data available!',
+        style: TextStyle(color: Colors.white),
+      ),
     );
 
     if (_registeredExpenses.isNotEmpty) {
@@ -104,6 +119,7 @@ class _ExpensesState extends State<Expenses> {
       );
     }
     return Scaffold(
+      backgroundColor: const Color(0xff1F2537),
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text(
@@ -121,40 +137,59 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 17),
-                child: Container(
-                  height: 190,
-                  width: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Center(
-                    child: ExpenseCategoryList(),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 240,
+              width: 390,
+              child: Card(
+                color: const Color(0xffE0E1DD),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Expanded(
+                        flex: 1,
+                        child: ExpenseCategoryList(),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 2,
+                        child: MyPieChart(
+                          expenses: _registeredExpenses,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 17),
-                child: MyPieChart(
-                  expenses: _registeredExpenses,
-                ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 18.0),
+              child: Row(
+                children: [
+                  Text(
+                    "Recent Activity",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
+            ),
+            Expanded(
+              child: mainContent,
+            ),
+          ],
+        ),
       ),
     );
   }
