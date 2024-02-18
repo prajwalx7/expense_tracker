@@ -188,6 +188,25 @@ class _ExpensesState extends State<Expenses> {
             Expanded(
               child: mainContent,
             ),
+            BottomNavigationBar(
+              iconSize: 30,
+              elevation: 10,
+              backgroundColor: const Color(0xffE0E1DD),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  label: 'Add',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.bar_chart_rounded),
+                  label: 'Statistics',
+                ),
+              ],
+            ),
           ],
         ),
       ),

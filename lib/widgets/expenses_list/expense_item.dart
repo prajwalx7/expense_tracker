@@ -41,7 +41,7 @@ class ExpenseItem extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(), // Add space between date and right edge
+              const Spacer(), 
               Text(
                 'Rs ${expense.amount.toStringAsFixed(2)}',
                 style: const TextStyle(fontWeight: FontWeight.bold),
