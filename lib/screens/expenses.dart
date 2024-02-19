@@ -1,16 +1,17 @@
+import 'package:expense_tracker/screens/statistics.dart';
+import 'package:flutter/material.dart';
+import 'package:expense_tracker/widgets/bottom_bar.dart';
 import 'package:expense_tracker/widgets/expense_category_list.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/widgets/pie_chart.dart';
-import 'package:flutter/Material.dart';
 
 class Expenses extends StatefulWidget {
-  const Expenses({super.key});
+  const Expenses({Key? key}) : super(key: key);
+
   @override
-  State<Expenses> createState() {
-    return _ExpensesState();
-  }
+  State<Expenses> createState() => _ExpensesState();
 }
 
 class _ExpensesState extends State<Expenses> {
@@ -103,6 +104,13 @@ class _ExpensesState extends State<Expenses> {
     );
   }
 
+  void _navigateToHome() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Expenses()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget mainContent = const Center(
@@ -118,94 +126,83 @@ class _ExpensesState extends State<Expenses> {
         onRemoveExpense: _removeExpense,
       );
     }
+
     return Scaffold(
       backgroundColor: const Color(0xff1F2537),
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: const Text(
-          'Expense Tracker',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.black87,
-        actions: [
-          IconButton(
-            onPressed: _onadd,
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(
+      body: SafeArea(
+        child: Stack(
           children: [
-            SizedBox(
-              height: 240,
-              width: 390,
-              child: Card(
-                color: const Color(0xffE0E1DD),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Expanded(
-                        flex: 1,
-                        child: ExpenseCategoryList(),
+            Column(
+              children: [
+                SizedBox(
+                  height: 240,
+                  width: 390,
+                  child: Card(
+                    color: const Color(0xffE0E1DD),
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Expanded(
+                            flex: 1,
+                            child: ExpenseCategoryList(),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            flex: 2,
+                            child: MyPieChart(
+                              expenses: _registeredExpenses,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 2,
-                        child: MyPieChart(
-                          expenses: _registeredExpenses,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 18.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Recent Activity",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 18.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Recent Activity",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: mainContent,
-            ),
-            BottomNavigationBar(
-              iconSize: 30,
-              elevation: 10,
-              backgroundColor: const Color(0xffE0E1DD),
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add),
-                  label: 'Add',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart_rounded),
-                  label: 'Statistics',
+                Expanded(
+                  child: mainContent,
                 ),
               ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: MyBottomBar(
+                onAdd: _onadd,
+                onNavigateHome: () {
+                  // Navigate to home page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Expenses()),
+                  );
+                },
+                onNavigateStatistics: () {
+                  // Navigate to statistics page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const UserStatistics()),
+                  );
+                },
+              ),
             ),
           ],
         ),
