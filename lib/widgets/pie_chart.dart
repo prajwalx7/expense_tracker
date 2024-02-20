@@ -19,6 +19,7 @@ class MyPieChart extends StatelessWidget {
           color: expense.categoryColor, value: percentage, title: '');
     }).toList();
 
+    // outer circle
     return Container(
       height: 200,
       width: 200,
@@ -27,16 +28,16 @@ class MyPieChart extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            spreadRadius: -10,
-            blurRadius: 17,
-            offset: Offset(-5, -5),
-            color: Colors.black45,
+            spreadRadius: -2,
+            blurRadius: 15,
+            offset: Offset(5, 5),
+            color: Color.fromARGB(255, 182, 203, 180),
           ),
           BoxShadow(
             spreadRadius: -2,
-            blurRadius: 10,
-            offset: Offset(7, 7),
-            color: Color.fromARGB(255, 188, 189, 184),
+            blurRadius: 15,
+            offset: Offset(-5, -5),
+            color: Color.fromARGB(255, 225, 218, 218),
           )
         ],
       ),
@@ -55,6 +56,8 @@ class MyPieChart extends StatelessWidget {
               ),
             ),
           ),
+
+          // inner circle
           Center(
             child: Container(
               height: 90,

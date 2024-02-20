@@ -1,6 +1,4 @@
-import 'package:expense_tracker/screens/statistics.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/widgets/bottom_bar.dart';
 import 'package:expense_tracker/widgets/expense_category_list.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense_model.dart';
@@ -104,109 +102,91 @@ class _ExpensesState extends State<Expenses> {
     );
   }
 
-  void _navigateToHome() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Expenses()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(
-      child: Text(
-        'No data available!',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-
-    if (_registeredExpenses.isNotEmpty) {
-      mainContent = ExpensesList(
-        expenses: _registeredExpenses,
-        onRemoveExpense: _removeExpense,
-      );
-    }
-
     return Scaffold(
       backgroundColor: const Color(0xff1F2537),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 240,
-                  width: 390,
-                  child: Card(
-                    color: const Color(0xffE0E1DD),
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Expanded(
-                            flex: 1,
-                            child: ExpenseCategoryList(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Hi, Welcome Back!",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 240,
+                      width: 390,
+                      child: Card(
+                        color: const Color(0xffE0E1DD),
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            children: [
+                              const Expanded(
+                                // flex: 1,
+                                child: ExpenseCategoryList(),
+                              ),
+                              // const Spacer(),
+                              MyPieChart(
+                                expenses: _registeredExpenses,
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            flex: 2,
-                            child: MyPieChart(
-                              expenses: _registeredExpenses,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 18.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Recent Activity",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                    ExpensesList(
+                      expenses: _registeredExpenses,
+                      onRemoveExpense: _removeExpense,
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 18.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Recent Activity",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: mainContent,
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: MyBottomBar(
-                onAdd: _onadd,
-                onNavigateHome: () {
-                  // Navigate to home page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Expenses()),
-                  );
-                },
-                onNavigateStatistics: () {
-                  // Navigate to statistics page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const UserStatistics()),
-                  );
-                },
               ),
             ),
           ],
         ),
       ),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(right: 10),
+        child: FloatingActionButton(
+          onPressed: _onadd,
+          backgroundColor: Colors.amber,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: const Icon(Icons.add),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
