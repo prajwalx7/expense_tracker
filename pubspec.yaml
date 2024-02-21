@@ -37,6 +37,7 @@ dependencies:
   uuid: ^4.3.3
   intl: ^0.19.0
   fl_chart: ^0.66.1
+  fading_edge_scrollview: ^4.0.0
 
 dev_dependencies:
   flutter_test:

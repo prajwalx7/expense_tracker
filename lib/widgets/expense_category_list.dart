@@ -8,10 +8,10 @@ class ExpenseCategoryList extends StatelessWidget {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.only(top: 10), 
+          padding: EdgeInsets.only(top: 10),
           child: Text(
             "Today's Expenses",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.white),
           ),
         ),
         const SizedBox(
@@ -22,15 +22,15 @@ class ExpenseCategoryList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildCategoryRow('Food', const Color.fromRGBO(123, 201, 82, 1)),
-              const SizedBox(height: 5), // Add spacing between rows
-              buildCategoryRow('Travel', const Color.fromRGBO(46, 198, 255, 1)),
-              const SizedBox(height: 5), // Add spacing between rows
-              buildCategoryRow('Leisure', const Color.fromRGBO(82, 98, 255, 1)),
-              const SizedBox(height: 5), // Add spacing between rows
-              buildCategoryRow('Work', const Color.fromRGBO(255, 171, 67, 1)),
-              const SizedBox(height: 5), // Add spacing between rows
-              buildCategoryRow('Others', const Color.fromRGBO(252, 91, 57, 1)),
+              buildCategoryRow('Food', const Color(0xff7ED7C1)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Travel', const Color(0xff7BD3EA)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Leisure', const Color(0xff756AB6)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Work', const Color(0xffFDFFAE)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Others', const Color(0xffEF9595)),
             ],
           ),
         ),
@@ -58,6 +58,7 @@ Widget buildCategoryRow(String category, Color color) {
           category,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     ],

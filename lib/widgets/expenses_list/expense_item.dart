@@ -11,7 +11,7 @@ class ExpenseItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 14, left: 10, right: 10),
       child: Card(
-        color: const Color(0xffE0E1DD),
+        color: const Color(0xff465262),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
@@ -30,21 +30,24 @@ class ExpenseItem extends StatelessWidget {
                     Text(
                       expense.title,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       expense.formatedDate,
                       style:
-                          const TextStyle(fontSize: 12, color: Colors.black45),
+                          const TextStyle(fontSize: 12, color: Colors.white70),
                     ),
                   ],
                 ),
               ),
-              const Spacer(), 
+              const Spacer(),
               Text(
                 'Rs ${expense.amount.toStringAsFixed(2)}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ],
           ),

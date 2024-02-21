@@ -15,7 +15,7 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [
     ExpenseModel(
-      amount: 150,
+      amount: 250,
       title: 'Lunch',
       date: DateTime.now(),
       category: Category.food,
@@ -27,7 +27,7 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
     ExpenseModel(
-      amount: 50,
+      amount: 500,
       title: 'Stationery',
       date: DateTime.now(),
       category: Category.others,
@@ -41,18 +41,6 @@ class _ExpensesState extends State<Expenses> {
     ExpenseModel(
       amount: 500,
       title: 'Keyboard',
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    ExpenseModel(
-      amount: 300,
-      title: 'Hotel',
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    ExpenseModel(
-      amount: 1000,
-      title: 'Fees',
       date: DateTime.now(),
       category: Category.work,
     ),
@@ -127,9 +115,11 @@ class _ExpensesState extends State<Expenses> {
                     SizedBox(
                       height: 240,
                       width: 390,
-                      child: Card(
-                        color: const Color(0xffE0E1DD),
-                        elevation: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xff465262),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.all(15),
                           child: Row(
@@ -179,7 +169,7 @@ class _ExpensesState extends State<Expenses> {
         margin: const EdgeInsets.only(right: 10),
         child: FloatingActionButton(
           onPressed: _onadd,
-          backgroundColor: Colors.amber,
+          backgroundColor: const Color(0xffFDFFAE),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

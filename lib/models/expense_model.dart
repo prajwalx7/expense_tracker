@@ -36,21 +36,16 @@ class ExpenseModel {
   Color get categoryColor {
     switch (category) {
       case Category.leisure:
-        return const Color.fromRGBO(82, 98, 255, 1);
+        return const Color(0xff756AB6);
       case Category.travel:
-        return const Color.fromRGBO(46, 198, 255, 1);
+        return const Color(0xff7BD3EA);
       case Category.food:
-        return const Color.fromRGBO(123, 201, 82, 1);
+        return const Color(0xff7ED7C1);
       case Category.work:
-        return const Color.fromRGBO(255, 171, 67, 1);
+        return const Color(0xffFDFFAE);
       case Category.others:
-        return const Color.fromRGBO(252, 91, 57, 1);
+        return const Color(0xffEF9595);
     }
   }
 }
 
-  // rgb(46, 198, 255)
-   // rgb(123, 201, 82)
-   // rgb(255, 171, 67)
-  //  rgb(252, 91, 57)
-  // Color.fromRGBO(139, 135, 130, 1), 
