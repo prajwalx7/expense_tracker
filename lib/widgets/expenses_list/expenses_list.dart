@@ -28,15 +28,15 @@ class _ExpensesListState extends State<ExpensesList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height:
-          MediaQuery.of(context).size.height * 0.6, // You can adjust this value
+          MediaQuery.of(context).size.height * 0.6, 
       child: FadingEdgeScrollView.fromScrollView(
         gradientFractionOnEnd: 0.2,
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
           controller: _controller,
-          padding: EdgeInsets.only(bottom: 140),
+          padding: const EdgeInsets.only(bottom: 140),
           itemCount: widget.expenses.length,
           itemBuilder: (ctx, index) => Dismissible(
             key: ValueKey(widget.expenses[index]),

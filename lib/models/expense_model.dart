@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 const uuid = Uuid();
 final formater = DateFormat.yMd();
 
-enum Category { food, travel, leisure, work, others }
+enum Category { food, travel, grocery, shopping, entertainment }
 
 const categoryIcons = {
-  Category.food: Icons.lunch_dining,
-  Category.work: Icons.work,
-  Category.travel: Icons.flight_takeoff,
-  Category.leisure: Icons.movie,
-  Category.others: Icons.adjust,
+  Category.food: AssetImage("assets/images/food.png"),
+  Category.shopping: AssetImage("assets/images/shopping.png"),
+  Category.travel: AssetImage("assets/images/travel.png"),
+  Category.grocery: AssetImage("assets/images/grocery.png"),
+  Category.entertainment: AssetImage("assets/images/entertainment.png"),
 };
 
 class ExpenseModel {
@@ -33,19 +33,20 @@ class ExpenseModel {
     return formater.format(date);
   }
 
+  // Pie Chart Colors
+
   Color get categoryColor {
     switch (category) {
-      case Category.leisure:
+      case Category.grocery:
         return const Color(0xff756AB6);
       case Category.travel:
         return const Color(0xff7BD3EA);
       case Category.food:
         return const Color(0xff7ED7C1);
-      case Category.work:
+      case Category.shopping:
         return const Color(0xffFDFFAE);
-      case Category.others:
+      case Category.entertainment:
         return const Color(0xffEF9595);
     }
   }
 }
-

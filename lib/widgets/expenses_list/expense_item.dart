@@ -17,10 +17,13 @@ class ExpenseItem extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                categoryIcons[expense.category],
-                color: expense.categoryColor,
-                size: 50,
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image(
+                  image: categoryIcons[expense.category] ??
+                      const AssetImage("assets/images/food.png"),
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
