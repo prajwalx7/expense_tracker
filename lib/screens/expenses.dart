@@ -48,6 +48,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _onadd() {
     showModalBottomSheet(
+      backgroundColor: const Color(0xff465262),
       isScrollControlled: true,
       context: context,
       builder: (ctx) => SingleChildScrollView(

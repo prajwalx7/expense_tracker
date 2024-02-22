@@ -3,7 +3,6 @@ import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
 const uuid = Uuid();
-final formater = DateFormat.yMd();
 
 enum Category { food, travel, grocery, shopping, entertainment }
 
@@ -30,7 +29,7 @@ class ExpenseModel {
   final Category category;
 
   String get formatedDate {
-    return formater.format(date);
+    return DateFormat('MMM dd, yyyy').format(date);
   }
 
   // Pie Chart Colors
