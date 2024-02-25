@@ -32,7 +32,7 @@ class _ExpensesListState extends State<ExpensesList> {
       height:
           MediaQuery.of(context).size.height * 0.6, 
       child: FadingEdgeScrollView.fromScrollView(
-        gradientFractionOnEnd: 0.2,
+        gradientFractionOnEnd: 0.08,
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
           controller: _controller,

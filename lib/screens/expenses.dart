@@ -127,10 +127,8 @@ class _ExpensesState extends State<Expenses> {
                           child: Row(
                             children: [
                               const Expanded(
-                                // flex: 1,
                                 child: ExpenseCategoryList(),
                               ),
-                              // const Spacer(),
                               MyPieChart(
                                 expenses: _registeredExpenses,
                               ),

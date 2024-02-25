@@ -33,15 +33,18 @@ class ExpenseItem extends StatelessWidget {
                     Text(
                       expense.title,
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       expense.formatedDate,
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white70,
+                      ),
                     ),
                   ],
                 ),
@@ -50,7 +53,9 @@ class ExpenseItem extends StatelessWidget {
               Text(
                 'Rs ${expense.amount.toStringAsFixed(2)}',
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
