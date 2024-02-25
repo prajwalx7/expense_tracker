@@ -14,6 +14,7 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [
+    // dummy expenses
     ExpenseModel(
       amount: 250,
       title: 'Lunch',
@@ -78,7 +79,7 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Expense has been deleted'),
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 4),
         action: SnackBarAction(
           label: 'Undo',
           onPressed: () {
