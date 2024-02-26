@@ -35,7 +35,7 @@ class _ExpensesListState extends State<ExpensesList> {
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
           controller: _controller,
-          padding: const EdgeInsets.only(bottom: 50),
+          padding: const EdgeInsets.only(bottom: 25),
           itemCount: widget.expenses.length,
           itemBuilder: (ctx, index) => Dismissible(
             key: ValueKey(widget.expenses[index]),

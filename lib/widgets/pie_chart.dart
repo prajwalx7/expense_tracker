@@ -24,7 +24,7 @@ class MyPieChart extends StatelessWidget {
       height: 200,
       width: 200,
       decoration: const BoxDecoration(
-        color: Color(0xff1F2537),
+        color: Color.fromARGB(255, 48, 56, 77),
         shape: BoxShape.circle,
       ),
       child: Stack(
@@ -46,11 +46,10 @@ class MyPieChart extends StatelessWidget {
           // inner circle
           Center(
             child: Container(
-              height: 90,
+              height: 100,
               decoration: const BoxDecoration(
-                color: Color(0xff1F2537),
+                color: Color.fromARGB(255, 57, 67, 92),
                 shape: BoxShape.circle,
-     
               ),
               child: Center(
                 child: Text(
