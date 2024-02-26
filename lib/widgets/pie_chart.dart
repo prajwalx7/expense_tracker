@@ -12,11 +12,24 @@ class MyPieChart extends StatelessWidget {
     // Calculate total expense amount
     double totalExpense = expenses.fold(0, (prev, curr) => prev + curr.amount);
 
-    // Calculate the percentage of each category
-    List<PieChartSectionData> sections = expenses.map((expense) {
-      double percentage = (expense.amount / totalExpense) * 100;
+    // Group expenses by category manually
+    final Map<Category, List<ExpenseModel>> groupedExpenses = {};
+    for (var expense in expenses) {
+      final category = expense.category;
+      groupedExpenses[category] ??= []; // Initialize list if not existing
+      groupedExpenses[category]!.add(expense);
+    }
+
+    // Calculate section data based on grouped expenses
+    List<PieChartSectionData> sections = groupedExpenses.entries.map((entry) {
+      final categoryExpenses = entry.value;
+      double totalExpenseForCategory =
+          categoryExpenses.fold(0, (prev, curr) => prev + curr.amount);
+      double percentage = (totalExpenseForCategory / totalExpense) * 100;
       return PieChartSectionData(
-          color: expense.categoryColor, value: percentage, title: '');
+          color: categoryExpenses.first.categoryColor,
+          value: percentage,
+          title: ''); // Setting title to an empty string
     }).toList();
 
     // outer circle
@@ -34,8 +47,8 @@ class MyPieChart extends StatelessWidget {
               height: 170,
               width: 170,
               child: PieChart(
-                swapAnimationDuration: const Duration(milliseconds: 750),
-                swapAnimationCurve: Curves.easeInOutQuint,
+                swapAnimationDuration: const Duration(milliseconds: 300),
+                swapAnimationCurve: Curves.easeOutQuad,
                 PieChartData(
                   sections: sections,
                 ),
