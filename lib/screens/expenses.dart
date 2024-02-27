@@ -1,9 +1,11 @@
+import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/widgets/expense_category_list.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/widgets/pie_chart.dart';
+import 'package:provider/provider.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({Key? key}) : super(key: key);
@@ -95,7 +97,7 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1F2537),
+      backgroundColor: Theme.of(context).colorScheme.background,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(
@@ -137,10 +139,14 @@ class _ExpensesState extends State<Expenses> {
                       child: IconButton(
                         iconSize: 30,
                         color: Colors.white,
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.dark_mode_outlined,
-                          // light_mode_outlined
+                        onPressed: () {
+                          Provider.of<ThemeProvider>(context, listen: false)
+                              .toggleTheme();
+                        },
+                        icon: Icon(
+                          Theme.of(context).brightness == Brightness.light
+                              ? Icons.dark_mode_outlined
+                              : Icons.light_mode_outlined,
                         ),
                       ),
                     ),
