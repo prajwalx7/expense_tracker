@@ -11,7 +11,7 @@ class ExpenseCategoryList extends StatelessWidget {
           padding: EdgeInsets.only(top: 10),
           child: Text(
             "Today's Expenses",
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            style: TextStyle(fontSize: 18,),
           ),
         ),
         const SizedBox(
@@ -58,7 +58,6 @@ Widget buildCategoryRow(String category, Color color) {
           category,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-          style: const TextStyle(color: Colors.white),
         ),
       ),
     ],

@@ -51,7 +51,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _onadd() {
     showModalBottomSheet(
-      backgroundColor: const Color(0xff465262),
+      // backgroundColor: const Color(0xff465262),
       isScrollControlled: true,
       context: context,
       builder: (ctx) => SingleChildScrollView(
@@ -97,7 +97,6 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(
@@ -121,12 +120,11 @@ class _ExpensesState extends State<Expenses> {
                         children: [
                           Text(
                             "Welcome Back!",
-                            style:
-                                TextStyle(color: Colors.white60, fontSize: 15),
+                            style: TextStyle(fontSize: 15),
                           ),
                           Text(
                             "Prajwal Dudhatkar",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -138,7 +136,6 @@ class _ExpensesState extends State<Expenses> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: IconButton(
                         iconSize: 30,
-                        color: Colors.white,
                         onPressed: () {
                           Provider.of<ThemeProvider>(context, listen: false)
                               .toggleTheme();
@@ -163,7 +160,7 @@ class _ExpensesState extends State<Expenses> {
                       width: 390,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xff465262),
+                          // color: const Color(0xff465262),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
@@ -191,7 +188,6 @@ class _ExpensesState extends State<Expenses> {
                           Text(
                             "Recent Activity",
                             style: TextStyle(
-                              color: Colors.white,
                               fontSize: 18,
                             ),
                           ),
@@ -213,7 +209,6 @@ class _ExpensesState extends State<Expenses> {
         margin: const EdgeInsets.only(right: 10),
         child: FloatingActionButton(
           onPressed: _onadd,
-          backgroundColor: const Color(0xffFDFFAE),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
