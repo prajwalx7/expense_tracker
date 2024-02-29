@@ -36,8 +36,8 @@ class MyPieChart extends StatelessWidget {
     return Container(
       height: 200,
       width: 200,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 48, 56, 77),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onPrimary,
         shape: BoxShape.circle,
       ),
       child: Stack(
@@ -60,14 +60,16 @@ class MyPieChart extends StatelessWidget {
           Center(
             child: Container(
               height: 100,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 57, 67, 92),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onPrimary,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: Text(
                   'Rs $totalExpense',
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),

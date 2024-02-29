@@ -28,17 +28,10 @@ class _NewExpenseState extends State<NewExpense> {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
     final pickedDate = await showDatePicker(
-        context: context,
-        firstDate: firstDate,
-        lastDate: now,
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.dark().copyWith(
-              primaryColor: Colors.blue[900],
-            ),
-            child: child!,
-          );
-        });
+      context: context,
+      firstDate: firstDate,
+      lastDate: now,
+    );
 
     setState(() {
       _selectedDate = pickedDate;
@@ -86,21 +79,17 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            cursorColor: Colors.white,
-            style: const TextStyle(color: Colors.white),
             controller: _titleController,
             maxLength: 15,
             decoration: const InputDecoration(
-              counterStyle: TextStyle(color: Colors.white),
               label: Text(
                 'Title',
-                style: TextStyle(color: Colors.white),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(),
               ),
             ),
           ),
@@ -114,22 +103,19 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               Expanded(
                 child: TextField(
-                  cursorColor: Colors.white,
-                  style: const TextStyle(color: Colors.white),
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     label: Text(
                       'Amount',
-                      style: TextStyle(color: Colors.white),
                     ),
                     prefixText: "Rs ",
-                    prefixStyle: TextStyle(color: Colors.white),
+                    prefixStyle: TextStyle(),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: BorderSide(),
                     ),
                   ),
                 ),
@@ -142,7 +128,6 @@ class _NewExpenseState extends State<NewExpense> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 4, vertical: 7),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
@@ -152,13 +137,11 @@ class _NewExpenseState extends State<NewExpense> {
                         _selectedDate == null
                             ? "No Date Selected"
                             : DateFormat('MMM dd, yyyy').format(_selectedDate!),
-                        style: const TextStyle(color: Colors.white),
                       ),
                       IconButton(
                         onPressed: _currentDatePicker,
                         icon: const Icon(
                           Icons.calendar_month,
-                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -177,12 +160,9 @@ class _NewExpenseState extends State<NewExpense> {
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 22, vertical: 6),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(4)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: DropdownButton(
-                  style: const TextStyle(color: Colors.white),
-                  dropdownColor: const Color(0xff465262),
                   value: _selectedCategory,
                   items: Category.values
                       .map(
@@ -204,7 +184,6 @@ class _NewExpenseState extends State<NewExpense> {
                   },
                   icon: const Icon(
                     Icons.arrow_drop_down,
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -216,7 +195,6 @@ class _NewExpenseState extends State<NewExpense> {
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.white),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 65, vertical: 20),
                     ),
@@ -225,13 +203,10 @@ class _NewExpenseState extends State<NewExpense> {
                     },
                     child: const Text(
                       'Cancel',
-                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xffFDFFAE),
-                      side: const BorderSide(color: Colors.white),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 20),
                     ),
@@ -240,7 +215,6 @@ class _NewExpenseState extends State<NewExpense> {
                     },
                     child: const Text(
                       'Save Expense',
-                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ],

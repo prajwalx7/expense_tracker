@@ -51,7 +51,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _onadd() {
     showModalBottomSheet(
-      // backgroundColor: const Color(0xff465262),
+      backgroundColor: Theme.of(context).colorScheme.onBackground,
       isScrollControlled: true,
       context: context,
       builder: (ctx) => SingleChildScrollView(
@@ -160,7 +160,7 @@ class _ExpensesState extends State<Expenses> {
                       width: 390,
                       child: Container(
                         decoration: BoxDecoration(
-                          // color: const Color(0xff465262),
+                          color: Theme.of(context).colorScheme.onBackground,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
@@ -212,7 +212,10 @@ class _ExpensesState extends State<Expenses> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          child: const Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

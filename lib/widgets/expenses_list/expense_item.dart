@@ -9,9 +9,12 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 14, left: 10, right: 10),
-      child: Card(
-        // color: const Color(0xff465262),
+      padding: const EdgeInsets.only(top: 14, left: 10, right: 10, bottom: 12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onBackground,
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
