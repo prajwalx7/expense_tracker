@@ -43,7 +43,7 @@ class _ExpensesState extends State<Expenses> {
     ),
     ExpenseModel(
       amount: 500,
-      title: 'Clothes',
+      title: 'Shopping',
       date: DateTime.now(),
       category: Category.shopping,
     ),
