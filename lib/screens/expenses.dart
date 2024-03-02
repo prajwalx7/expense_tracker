@@ -81,7 +81,7 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Expense has been deleted'),
-        duration: const Duration(seconds: 4),
+        duration: const Duration(seconds: 3),
         action: SnackBarAction(
           label: 'Undo',
           onPressed: () {

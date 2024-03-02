@@ -29,7 +29,7 @@ class MyPieChart extends StatelessWidget {
       return PieChartSectionData(
           color: categoryExpenses.first.categoryColor,
           value: percentage,
-          title: ''); // Setting title to an empty string
+          title: ''); 
     }).toList();
 
     // outer circle
