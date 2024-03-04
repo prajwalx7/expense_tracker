@@ -25,7 +25,7 @@ class ExpenseItem extends StatelessWidget {
                 height: 50,
                 child: Image(
                   image: categoryIcons[expense.category] ??
-                      const AssetImage("assets/images/food.png"),
+                      const AssetImage("assets/images/shopping.png"),
                 ),
               ),
               const SizedBox(width: 10),
