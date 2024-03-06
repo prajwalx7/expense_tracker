@@ -53,12 +53,15 @@ class _ExpensesState extends State<Expenses> {
     showModalBottomSheet(
       backgroundColor: Theme.of(context).colorScheme.onBackground,
       isScrollControlled: true,
+      enableDrag: true,
       context: context,
       builder: (ctx) => SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
+          height: MediaQuery.of(context).size.height *
+              0.7,
           child: NewExpense(
             onAddExpense: _addExpense,
           ),
