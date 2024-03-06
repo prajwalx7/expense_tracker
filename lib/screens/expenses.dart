@@ -27,7 +27,7 @@ class _ExpensesState extends State<Expenses> {
       amount: 300,
       title: 'Grocery',
       date: DateTime.now(),
-      category: Category.grocery,
+      category: Category.others,
     ),
     ExpenseModel(
       amount: 500,
@@ -60,8 +60,7 @@ class _ExpensesState extends State<Expenses> {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          height: MediaQuery.of(context).size.height *
-              0.7,
+          height: MediaQuery.of(context).size.height * 0.7,
           child: NewExpense(
             onAddExpense: _addExpense,
           ),

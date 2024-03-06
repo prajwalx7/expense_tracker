@@ -4,13 +4,13 @@ import 'package:intl/intl.dart';
 
 const uuid = Uuid();
 
-enum Category { food, travel, grocery, shopping, entertainment }
+enum Category { food, travel, others, shopping, entertainment }
 
 const categoryIcons = {
   Category.food: AssetImage("assets/images/food.png"),
   Category.shopping: AssetImage("assets/images/shopping.png"),
   Category.travel: AssetImage("assets/images/travel.png"),
-  Category.grocery: AssetImage("assets/images/grocery.png"),
+  Category.others: AssetImage("assets/images/grocery.png"),
   Category.entertainment: AssetImage("assets/images/entertainment.png"),
 };
 
@@ -36,7 +36,7 @@ class ExpenseModel {
 
   Color get categoryColor {
     switch (category) {
-      case Category.grocery:
+      case Category.others:
         return const Color(0xff756AB6);
       case Category.travel:
         return const Color(0xff7BD3EA);
