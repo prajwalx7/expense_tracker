@@ -19,7 +19,7 @@ class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [];
   late ExpenseStorage _expenseStorage;
 
-   @override
+  @override
   void initState() {
     super.initState();
     _expenseStorage = ExpenseStorage(); // Initialize expense store
@@ -29,7 +29,8 @@ class _ExpensesState extends State<Expenses> {
   void _loadExpenses() async {
     List<ExpenseModel> expenses = await _expenseStorage.loadExpenses();
     setState(() {
-      _registeredExpenses.addAll(expenses); // Add loaded expenses to _registeredExpenses
+      _registeredExpenses
+          .addAll(expenses); // Add loaded expenses to _registeredExpenses
     });
   }
 
@@ -180,10 +181,18 @@ class _ExpensesState extends State<Expenses> {
                         ],
                       ),
                     ),
-                    ExpensesList(
-                      expenses: _registeredExpenses,
-                      onRemoveExpense: _removeExpense,
-                    ),
+                    _registeredExpenses.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.only(top: 180),
+                            child: Text(
+                              "No data available",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          )
+                        : ExpensesList(
+                            expenses: _registeredExpenses,
+                            onRemoveExpense: _removeExpense,
+                          ),
                   ],
                 ),
               ),
