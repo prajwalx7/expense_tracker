@@ -1,4 +1,4 @@
-import 'package:expense_tracker/screens/expenses.dart';
+import 'package:expense_tracker/screens/splash_screen.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: const Expenses(),
+      home: const SplashScreen(),
     );
   }
 }
