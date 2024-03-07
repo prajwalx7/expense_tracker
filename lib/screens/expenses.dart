@@ -1,3 +1,4 @@
+import 'package:expense_tracker/screens/expense_history.dart';
 import 'package:expense_tracker/storage/expense_storage.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -183,16 +184,47 @@ class _ExpensesState extends State<Expenses> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 18.0),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
                       child: Row(
                         children: [
-                          Text(
+                          const Text(
                             "Recent Activity",
                             style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
+                          const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ExpenseHistory(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 5),
+                                  minimumSize: const Size(70, 10),
+                                  elevation: 0,
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.onPrimary),
+                              child: const Text(
+                                "view all",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
