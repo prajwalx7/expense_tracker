@@ -1,3 +1,4 @@
+import 'package:expense_tracker/storage/expense_storage.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/widgets/expense_category_list.dart';
@@ -15,39 +16,22 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<ExpenseModel> _registeredExpenses = [
-    // dummy expenses
-    ExpenseModel(
-      amount: 250,
-      title: 'Lunch',
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    ExpenseModel(
-      amount: 300,
-      title: 'Grocery',
-      date: DateTime.now(),
-      category: Category.others,
-    ),
-    ExpenseModel(
-      amount: 500,
-      title: 'Movie',
-      date: DateTime.now(),
-      category: Category.entertainment,
-    ),
-    ExpenseModel(
-      amount: 650,
-      title: 'Fuel',
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
-    ExpenseModel(
-      amount: 500,
-      title: 'Shopping',
-      date: DateTime.now(),
-      category: Category.shopping,
-    ),
-  ];
+  final List<ExpenseModel> _registeredExpenses = [];
+  late ExpenseStorage _expenseStorage;
+
+   @override
+  void initState() {
+    super.initState();
+    _expenseStorage = ExpenseStorage(); // Initialize expense store
+    _loadExpenses(); // Load expenses when the widget initialise
+  }
+
+  void _loadExpenses() async {
+    List<ExpenseModel> expenses = await _expenseStorage.loadExpenses();
+    setState(() {
+      _registeredExpenses.addAll(expenses); // Add loaded expenses to _registeredExpenses
+    });
+  }
 
   void _onadd() {
     showModalBottomSheet(

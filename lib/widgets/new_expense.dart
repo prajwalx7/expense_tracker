@@ -50,7 +50,8 @@ class _NewExpenseState extends State<NewExpense> {
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text('Invalid Input'),
           content: const Text(
-              'Please make sure a valid title, amount and date was entered.'),
+            'Please make sure a valid title, amount and date was entered.',
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -68,7 +69,8 @@ class _NewExpenseState extends State<NewExpense> {
           amount: enteredAmount,
           title: _titleController.text,
           date: _selectedDate!,
-          category: _selectedCategory),
+          category: _selectedCategory,
+          id: ''),
     );
     Navigator.pop(context);
   }
