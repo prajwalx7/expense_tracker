@@ -56,6 +56,15 @@ class _ExpensesState extends State<Expenses> {
 
   void _addExpense(ExpenseModel expense) {
     _registeredExpenses.add(expense);
+    _expenseStorage.saveExpense(expense).then((_) {
+      print('Expense saved successfully:');
+      // print('Amount: ${expense.amount}');
+      // print('Title: ${expense.title}');
+      // print('Date: ${expense.date}');
+      // print('Category: ${expense.category}');
+    }).catchError((error) {
+      print('Error saving expense: $error');
+    });
     setState(() {});
   }
 
@@ -64,6 +73,8 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
+    _expenseStorage
+        .removeExpense(expense.id); // Remove expense from SharedPreferences
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -75,10 +86,14 @@ class _ExpensesState extends State<Expenses> {
             setState(() {
               _registeredExpenses.insert(expenseIndex, expense);
             });
+            _expenseStorage
+                .saveExpense(expense); // Save the expense again if undone
           },
         ),
       ),
     );
+
+    print('Expense removed from _registeredExpenses: $_registeredExpenses');
   }
 
   @override
