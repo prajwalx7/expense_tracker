@@ -21,17 +21,17 @@ class ExpenseStorage {
     final prefs = await SharedPreferences.getInstance();
     List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
 
-    // Print expense object before encoding to JSON
+    // print expense object before encodin to json
     print('Expense object before encoding to JSON: $expense');
 
     // Encode expense object to JSON
     String jsonExpense = jsonEncode(expense.toJson());
     print('Encoded JSON string: $jsonExpense');
 
-    // Add encoded JSON string to the list of expenses
+    // add encoded json string to the list of expenses
     expenseStrings.add(jsonExpense);
 
-    // Save the list of expenses to SharedPreferences
+    // Save the list of expenses to prefs
     await prefs.setStringList(_keyExpenses, expenseStrings);
   }
 
