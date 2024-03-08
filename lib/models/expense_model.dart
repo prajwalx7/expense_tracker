@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 
 // const uuid = Uuid();
 
-enum Category { food, travel, others, shopping, entertainment }
+enum Category { food, shopping, entertainment, transportation, miscellaneous }
 
 const categoryIcons = {
   Category.food: AssetImage("assets/images/food.png"),
   Category.shopping: AssetImage("assets/images/shopping.png"),
-  Category.travel: AssetImage("assets/images/travel.png"),
-  Category.others: AssetImage("assets/images/grocery.png"),
   Category.entertainment: AssetImage("assets/images/entertainment.png"),
+  Category.transportation: AssetImage("assets/images/travel.png"),
+  Category.miscellaneous: AssetImage("assets/images/grocery.png"),
 };
 
 class ExpenseModel {
@@ -65,18 +65,18 @@ class ExpenseModel {
   // Piechrt colors
   Color get categoryColor {
     switch (category) {
-      case Category.others:
-        return const Color(0xff756AB6);
-      case Category.travel:
-        return const Color(0xff7BD3EA);
       case Category.food:
         return const Color(0xff7ED7C1);
       case Category.shopping:
         return const Color(0xffFDFFAE);
       case Category.entertainment:
+        return const Color(0xff756AB6);
+      case Category.transportation:
+        return const Color(0xff7BD3EA);
+      case Category.miscellaneous:
         return const Color(0xffEF9595);
       default:
-        return Colors.black; 
+        return Colors.black;
     }
   }
 }

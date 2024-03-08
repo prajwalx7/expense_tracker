@@ -8,9 +8,9 @@ class ExpenseCategoryList extends StatelessWidget {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.only(top: 10),
+          padding: EdgeInsets.only(top: 10, right: 20),
           child: Text(
-            "Today's Expenses",
+            "Daily Expenses",
             style: TextStyle(
               fontSize: 18,
             ),
@@ -26,13 +26,13 @@ class ExpenseCategoryList extends StatelessWidget {
             children: [
               buildCategoryRow('Food', const Color(0xff7ED7C1)),
               const SizedBox(height: 5),
-              buildCategoryRow('Travel', const Color(0xff7BD3EA)),
-              const SizedBox(height: 5),
-              buildCategoryRow('Others', const Color(0xff756AB6)),
-              const SizedBox(height: 5),
               buildCategoryRow('Shopping', const Color(0xffFDFFAE)),
               const SizedBox(height: 5),
-              buildCategoryRow('Entertainment', const Color(0xffEF9595)),
+              buildCategoryRow('Entertainment', const Color(0xff756AB6)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Transportation', const Color(0xff7BD3EA)),
+              const SizedBox(height: 5),
+              buildCategoryRow('Miscellaneous', const Color(0xffEF9595)),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:expense_tracker/screens/expenses.dart';
 import 'package:expense_tracker/screens/splash_screen.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
       home: const SplashScreen(),
+      routes: {'/home': (context) => const Expenses()},
     );
   }
 }

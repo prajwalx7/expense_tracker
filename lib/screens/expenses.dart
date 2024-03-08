@@ -203,7 +203,7 @@ class _ExpensesState extends State<Expenses> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const ExpenseHistory(),
+                                        ExpenseHistory(expenses: _registeredExpenses),
                                   ),
                                 );
                               },

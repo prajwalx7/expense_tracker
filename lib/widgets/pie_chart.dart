@@ -29,7 +29,7 @@ class MyPieChart extends StatelessWidget {
       return PieChartSectionData(
           color: categoryExpenses.first.categoryColor,
           value: percentage,
-          title: ''); 
+          title: '');
     }).toList();
 
     // outer circle
@@ -64,13 +64,23 @@ class MyPieChart extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onPrimary,
                 shape: BoxShape.circle,
               ),
-              child: Center(
-                child: Text(
-                  'Rs $totalExpense',
-                  style: const TextStyle(
-                    fontSize: 14,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Total",
+                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
                   ),
-                ),
+                  Center(
+                    child: Text(
+                      'Rs $totalExpense',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
