@@ -42,7 +42,7 @@ class MyPieChart extends StatelessWidget {
       );
     }).toList();
 
-    return Container(
+    return SizedBox(
       height: 200,
       width: 200,
       child: Stack(

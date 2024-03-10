@@ -110,30 +110,30 @@ class _ExpensesState extends State<Expenses> {
                 alignment: Alignment.topLeft,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage("assets/images/avatar.jpeg"),
                     ),
                     const SizedBox(width: 10),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome Back!",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          Text(
-                            "Prajwal Dudhatkar",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Welcome Back!",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Text(
+                              "Prajwal Dudhatkar",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 100,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -202,8 +202,8 @@ class _ExpensesState extends State<Expenses> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        ExpenseHistory(expenses: _registeredExpenses),
+                                    builder: (context) => ExpenseHistory(
+                                        expenses: _registeredExpenses),
                                   ),
                                 );
                               },
