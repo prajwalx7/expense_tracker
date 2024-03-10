@@ -14,7 +14,7 @@ class ExpenseItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onBackground,
           borderRadius: BorderRadius.circular(12),
-        ),
+        ), 
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
