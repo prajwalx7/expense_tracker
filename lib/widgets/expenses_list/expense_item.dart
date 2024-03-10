@@ -2,7 +2,7 @@ import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseItem extends StatelessWidget {
-  const ExpenseItem(this.expense, {super.key});
+  const ExpenseItem(this.expense, {Key? key}) : super(key: key);
 
   final ExpenseModel expense;
 
@@ -14,7 +14,7 @@ class ExpenseItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onBackground,
           borderRadius: BorderRadius.circular(12),
-        ), 
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
@@ -28,7 +28,7 @@ class ExpenseItem extends StatelessWidget {
                       const AssetImage("assets/images/shopping.png"),
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 20),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,23 +38,27 @@ class ExpenseItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     Text(
-                      expense.formattedDate,
+                      'Rs ${expense.amount.toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Spacer(),
-              Text(
-                'Rs ${expense.amount.toStringAsFixed(2)}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+              Container(
+                padding: const EdgeInsets.only(top: 14),
+                width: 80,
+                child: Text(
+                  expense.formattedDate,
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],

@@ -36,7 +36,7 @@ class _ExpensesListState extends State<ExpensesList> {
         child: ListView.builder(
           // reverse: true,
           controller: _controller,
-          padding: const EdgeInsets.only(bottom: 25),
+          padding: const EdgeInsets.only(bottom: 80),
           itemCount: widget.expenses.length,
           itemBuilder: (ctx, index) => Dismissible(
             key: ValueKey(widget.expenses[index]),
