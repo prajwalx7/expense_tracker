@@ -9,6 +9,14 @@ class MyPieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Access current theme
+    final currentTheme = Theme.of(context);
+
+    // Determine shadow colors based on theme mode
+    Color shadowColor = currentTheme.brightness == Brightness.light
+        ? Colors.black.withOpacity(0.2)
+        : Colors.white.withOpacity(0.1);
+
     // Calculate total expense amount
     double totalExpense = expenses.fold(0, (prev, curr) => prev + curr.amount);
 
@@ -27,60 +35,101 @@ class MyPieChart extends StatelessWidget {
           categoryExpenses.fold(0, (prev, curr) => prev + curr.amount);
       double percentage = (totalExpenseForCategory / totalExpense) * 100;
       return PieChartSectionData(
-          color: categoryExpenses.first.categoryColor,
-          value: percentage,
-          title: '');
+        color: categoryExpenses.first.categoryColor,
+        value: percentage,
+        title: '',
+        radius: 40,
+      );
     }).toList();
 
-    // outer circle
     return Container(
       height: 200,
       width: 200,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
-        shape: BoxShape.circle,
-      ),
       child: Stack(
         children: [
           Center(
             child: SizedBox(
-              height: 170,
-              width: 170,
-              child: PieChart(
-                swapAnimationDuration: const Duration(milliseconds: 300),
-                swapAnimationCurve: Curves.easeOutQuad,
-                PieChartData(
-                  sections: sections,
-                ),
-              ),
-            ),
-          ),
-
-          // inner circle
-          Center(
-            child: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onPrimary,
-                shape: BoxShape.circle,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              height: 180,
+              width: 180,
+              child: Stack(
                 children: [
-                  const Text(
-                    "Total",
-                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 12),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: [
+                          currentTheme.colorScheme.onBackground,
+                          currentTheme.colorScheme.onBackground,
+                        ],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: shadowColor,
+                          offset: Offset(4, 4),
+                          blurRadius: 6,
+                          spreadRadius: -2,
+                        ),
+                        BoxShadow(
+                          color: shadowColor,
+                          offset: Offset(-4, -4),
+                          blurRadius: 6,
+                          spreadRadius: -2,
+                        ),
+                      ],
+                    ),
                   ),
                   Center(
-                    child: Text(
-                      'Rs $totalExpense',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900,
+                    child: SizedBox(
+                      height: 180,
+                      width: 180,
+                      child: PieChart(
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 300),
+                        swapAnimationCurve: Curves.easeOutQuad,
+                        PieChartData(
+                          sections: sections,
+                        ),
                       ),
                     ),
                   ),
                 ],
+              ),
+            ),
+          ),
+          Center(
+            // inner circle
+            child: Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: currentTheme.colorScheme.onBackground,
+                boxShadow: [
+                  BoxShadow(
+                    color: shadowColor,
+                    offset: Offset(-2, -2),
+                    blurRadius: 4,
+                    spreadRadius: 2,
+                  ),
+                  BoxShadow(
+                    color: shadowColor,
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'Rs $totalExpense',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: currentTheme.colorScheme.onTertiary,
+                  ),
+                ),
               ),
             ),
           ),
