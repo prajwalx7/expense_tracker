@@ -37,8 +37,10 @@ class MyPieChart extends StatelessWidget {
       return PieChartSectionData(
         color: categoryExpenses.first.categoryColor,
         value: percentage,
-        title: '',
+        showTitle: true,
+        title: '${percentage.toStringAsFixed(0)}%',
         radius: 40,
+        titleStyle: const TextStyle(fontSize: 10, color: Colors.black),
       );
     }).toList();
 
@@ -67,13 +69,13 @@ class MyPieChart extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           color: shadowColor,
-                          offset: Offset(4, 4),
+                          offset: const Offset(4, 4),
                           blurRadius: 6,
                           spreadRadius: -2,
                         ),
                         BoxShadow(
                           color: shadowColor,
-                          offset: Offset(-4, -4),
+                          offset: const Offset(-4, -4),
                           blurRadius: 6,
                           spreadRadius: -2,
                         ),
@@ -109,13 +111,13 @@ class MyPieChart extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: shadowColor,
-                    offset: Offset(-2, -2),
+                    offset: const Offset(-2, -2),
                     blurRadius: 4,
                     spreadRadius: 2,
                   ),
                   BoxShadow(
                     color: shadowColor,
-                    offset: Offset(2, 2),
+                    offset: const Offset(2, 2),
                     blurRadius: 4,
                     spreadRadius: 2,
                   ),

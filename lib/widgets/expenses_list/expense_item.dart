@@ -33,6 +33,7 @@ class ExpenseItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // titel
                     Text(
                       expense.title,
                       style: const TextStyle(
@@ -41,7 +42,13 @@ class ExpenseItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    Text(
+                      // Category name
+                      expense.category.toString().split('.').last,
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
                     const SizedBox(height: 5),
+                    // amount
                     Text(
                       'Rs ${expense.amount.toStringAsFixed(2)}',
                       style: const TextStyle(
