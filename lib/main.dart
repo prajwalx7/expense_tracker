@@ -1,11 +1,16 @@
 import 'package:expense_tracker/screens/expenses.dart';
 import 'package:expense_tracker/screens/splash_screen.dart';
+import 'package:expense_tracker/storage/expense_storage.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ExpenseStorageAdapter());
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
@@ -14,8 +19,19 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

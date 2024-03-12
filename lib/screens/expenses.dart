@@ -7,6 +7,7 @@ import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/widgets/pie_chart.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 class Expenses extends StatefulWidget {
@@ -18,22 +19,6 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [];
-  late ExpenseStorage _expenseStorage;
-
-  @override
-  void initState() {
-    super.initState();
-    _expenseStorage = ExpenseStorage(); // Initialize expense store
-    _loadExpenses(); // Load expenses when the widget initialise
-  }
-
-  void _loadExpenses() async {
-    List<ExpenseModel> expenses = await _expenseStorage.loadExpenses();
-    setState(() {
-      _registeredExpenses
-          .addAll(expenses); // Add loaded expenses to _registeredExpenses
-    });
-  }
 
   void _onadd() {
     showModalBottomSheet(
@@ -48,25 +33,69 @@ class _ExpensesState extends State<Expenses> {
           ),
           height: MediaQuery.of(context).size.height * 0.7,
           child: NewExpense(
-            onAddExpense: _addExpense,
+            onAddExpense: addExpense,
           ),
         ),
       ),
     );
   }
 
-  void _addExpense(ExpenseModel expense) {
-    _registeredExpenses.add(expense);
-    _expenseStorage.saveExpense(expense).then((_) {
-      print('Expense saved successfully:');
-      // print('Amount: ${expense.amount}');
-      // print('Title: ${expense.title}');
-      // print('Date: ${expense.date}');
-      // print('Category: ${expense.category}');
-    }).catchError((error) {
-      print('Error saving expense: $error');
-    });
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
+    // Initialize Hive
+    Hive.initFlutter();
+    _loadExpenses();
+  }
+
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
+  }
+
+  void _loadExpenses() async {
+    try {
+      final box = await Hive.openBox<ExpenseStorage>('expenses');
+      final List<ExpenseStorage> expensesStorage = box.values.toList();
+      final List<ExpenseModel> expenses = expensesStorage
+          .map((expenseStorage) => ExpenseModel(
+                title: expenseStorage.title,
+                amount: expenseStorage.amount,
+                date: expenseStorage.date,
+                category: getCategoryFromString(expenseStorage.category),
+                id: expenseStorage.id,
+              ))
+          .toList();
+      setState(() {
+        _registeredExpenses.addAll(expenses);
+      });
+      // Close the box
+      await box.close();
+    } catch (e) {
+      print('Error loading expenses: $e');
+    }
+  }
+
+  void addExpense(ExpenseModel expense) async {
+    try {
+      final box = await Hive.openBox<ExpenseStorage>('expenses');
+      final expenseStorage = ExpenseStorage(
+        expense.title,
+        expense.amount,
+        DateTime.now(), // Assign the current date
+        expense.category.toString(), // Convert Category enum to string
+        expense.id,
+      );
+      await box.add(expenseStorage);
+      await box.close();
+
+      setState(() {
+        _registeredExpenses.add(expense);
+      });
+    } catch (e) {
+      print('Error saving expense: $e');
+    }
   }
 
   void _removeExpense(ExpenseModel expense) {
@@ -74,8 +103,7 @@ class _ExpensesState extends State<Expenses> {
     setState(() {
       _registeredExpenses.remove(expense);
     });
-    _expenseStorage
-        .removeExpense(expense.id); // Remove expense from SharedPreferences
+
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -87,14 +115,10 @@ class _ExpensesState extends State<Expenses> {
             setState(() {
               _registeredExpenses.insert(expenseIndex, expense);
             });
-            _expenseStorage
-                .saveExpense(expense); // Save the expense again if undone
           },
         ),
       ),
     );
-
-    print('Expense removed from _registeredExpenses: $_registeredExpenses');
   }
 
   @override
