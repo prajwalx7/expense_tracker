@@ -48,16 +48,27 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder: (ctx) => AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text('Invalid Input'),
-          content: const Text(
+          title: Text(
+            'Invalid Input',
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+                fontWeight: FontWeight.bold),
+          ),
+          content: Text(
             'Please make sure a valid title, amount and date was entered.',
+            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(ctx);
               },
-              child: const Text('Ok'),
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontWeight: FontWeight.bold),
+              ),
             )
           ],
         ),
@@ -237,6 +248,7 @@ class _NewExpenseState extends State<NewExpense> {
                         child: Text(
                           'Save Expense',
                           style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),

@@ -28,7 +28,7 @@ class ExpenseItem extends StatelessWidget {
                       const AssetImage("assets/images/shopping.png"),
                 ),
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 20), 
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

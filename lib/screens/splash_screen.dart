@@ -41,7 +41,7 @@ class SplashScreenState extends State<SplashScreen> {
               height: 30,
             ),
             const Text(
-              "TrackXpense",
+              "Expensio",
               style: TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             )
