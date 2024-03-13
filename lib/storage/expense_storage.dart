@@ -1,40 +1,49 @@
-import 'package:hive/hive.dart';
-part 'expense_storage.g.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/models/expense_model.dart';
 
-@HiveType(typeId: 0)
-class ExpenseStorage extends HiveObject {
-  @HiveField(0)
-  late String title;
+class ExpenseStorage {
+  static const _keyExpenses = 'expenses';
 
-  @HiveField(1)
-  late double amount;
+  Future<List<ExpenseModel>> loadExpenses() async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String>? expenseStrings = prefs.getStringList(_keyExpenses);
+    if (expenseStrings == null) {
+      return [];
+    }
+    return expenseStrings.map((expenseString) {
+      final Map<String, dynamic> expenseJson = jsonDecode(expenseString);
+      return ExpenseModel.fromJson(expenseJson);
+    }).toList();
+  }
 
-  @HiveField(2)
-  late DateTime date;
+  Future<void> saveExpense(ExpenseModel expense) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
 
-  @HiveField(3)
-  late String category;
+    // print expense object before encodin to json
+    print('Expense object before encoding to JSON: $expense');
 
-  @HiveField(4)
-  late String id;
+    // Encode expense object to JSON
+    String jsonExpense = jsonEncode(expense.toJson());
+    print('Encoded JSON string: $jsonExpense');
 
-  ExpenseStorage(this.title, this.amount, this.date, this.category, this.id);
-}
+    // add encoded json string to the list of expenses
+    expenseStrings.add(jsonExpense);
 
-void saveExpense(ExpenseStorage expense) async {
-  final box = await Hive.openBox('expenses');
-  await box.add(expense);
-  await box.close();
-}
+    // Save the list of expenses to prefs
+    await prefs.setStringList(_keyExpenses, expenseStrings);
+  }
 
-Future<List<ExpenseStorage>> loadExpenses() async {
-  final box = await Hive.openBox('expenses');
-  final expenses = box.values.toList().cast<ExpenseStorage>();
+  Future<void> removeExpense(String expenseId) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
+    expenseStrings.removeWhere((expenseString) {
+      final Map<String, dynamic> expenseJson = jsonDecode(expenseString);
+      return expenseJson['id'] == expenseId;
+    });
+    await prefs.setStringList(_keyExpenses, expenseStrings);
 
-  await box.close();
-  return expenses;
-}
-
-void dispose() {
-  Hive.close();
+    print('Expense removed from SharedPreferences: $expenseId');
+  }
 }

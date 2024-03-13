@@ -1,25 +1,10 @@
 import 'package:flutter/material.dart';
+// import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
+// const uuid = Uuid();
 
 enum Category { food, shopping, entertainment, transportation, miscellaneous }
-
-Category getCategoryFromString(String categoryString) {
-  switch (categoryString) {
-    case 'food':
-      return Category.food;
-    case 'shopping':
-      return Category.shopping;
-    case 'entertainment':
-      return Category.entertainment;
-    case 'transportation':
-      return Category.transportation;
-    case 'miscellaneous':
-      return Category.miscellaneous;
-    default:
-      return Category.miscellaneous; // Default to miscellaneous if categoryString is not recognized
-  }
-}
 
 const categoryIcons = {
   Category.food: AssetImage("assets/images/food.png"),
@@ -44,6 +29,34 @@ class ExpenseModel {
   final String title;
   final Category category;
 
+  // constrctor to create expense model from JSON data
+  factory ExpenseModel.fromJson(Map<String, dynamic> json) {
+    return ExpenseModel(
+      amount: json['amount'],
+      title: json['title'],
+      date: DateTime.parse(json['date']),
+      category: _categoryFromString(json['category']),
+      id: json['id'],
+    );
+  }
+
+  // convert expense moodel object to JSON data
+  Map<String, dynamic> toJson() {
+    return {
+      'amount': amount,
+      'title': title,
+      'date': date.toIso8601String(),
+      'category': category.toString().split('.').last,
+      'id': id,
+    };
+  }
+
+  // helper method to convert string to Category enum
+  static Category _categoryFromString(String categoryString) {
+    return Category.values.firstWhere(
+      (category) => category.toString().split('.').last == categoryString,
+    );
+  }
 
   String get formattedDate {
     return DateFormat('MMM dd, yyyy').format(date);
