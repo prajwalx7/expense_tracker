@@ -34,19 +34,21 @@ class _ExpensesListState extends State<ExpensesList> {
         gradientFractionOnEnd: 0.08,
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
-          // reverse: true,
           controller: _controller,
           padding: const EdgeInsets.only(bottom: 80),
           itemCount: widget.expenses.length,
-          itemBuilder: (ctx, index) => Dismissible(
-            key: ValueKey(widget.expenses[index]),
-            onDismissed: (direction) {
-              widget.onRemoveExpense(widget.expenses[index]);
-            },
-            child: ExpenseItem(
-              widget.expenses[index],
-            ),
-          ),
+          itemBuilder: (ctx, index) {
+            final reversedIndex = widget.expenses.length - 1 - index;
+            return Dismissible(
+              key: ValueKey(widget.expenses[reversedIndex]),
+              onDismissed: (direction) {
+                widget.onRemoveExpense(widget.expenses[reversedIndex]);
+              },
+              child: ExpenseItem(
+                widget.expenses[reversedIndex],
+              ),
+            );
+          },
         ),
       ),
     );

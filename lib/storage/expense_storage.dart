@@ -8,42 +8,26 @@ class ExpenseStorage {
   Future<List<ExpenseModel>> loadExpenses() async {
     final prefs = await SharedPreferences.getInstance();
     final List<String>? expenseStrings = prefs.getStringList(_keyExpenses);
-    if (expenseStrings == null) {
-      return [];
-    }
-    return expenseStrings.map((expenseString) {
-      final Map<String, dynamic> expenseJson = jsonDecode(expenseString);
-      return ExpenseModel.fromJson(expenseJson);
-    }).toList();
+    return expenseStrings
+            ?.map((expenseString) =>
+                ExpenseModel.fromJson(jsonDecode(expenseString)))
+            .toList() ??
+        [];
   }
 
   Future<void> saveExpense(ExpenseModel expense) async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
-
-    // print expense object before encodin to json
-    print('Expense object before encoding to JSON: $expense');
-
-    // Encode expense object to JSON
-    String jsonExpense = jsonEncode(expense.toJson());
-    print('Encoded JSON string: $jsonExpense');
-
-    // add encoded json string to the list of expenses
+    final List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
+    final String jsonExpense = jsonEncode(expense.toJson());
     expenseStrings.add(jsonExpense);
-
-    // Save the list of expenses to prefs
     await prefs.setStringList(_keyExpenses, expenseStrings);
   }
 
   Future<void> removeExpense(String expenseId) async {
     final prefs = await SharedPreferences.getInstance();
-    List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
-    expenseStrings.removeWhere((expenseString) {
-      final Map<String, dynamic> expenseJson = jsonDecode(expenseString);
-      return expenseJson['id'] == expenseId;
-    });
+    final List<String> expenseStrings = prefs.getStringList(_keyExpenses) ?? [];
+    expenseStrings.removeWhere(
+        (expenseString) => jsonDecode(expenseString)['id'] == expenseId);
     await prefs.setStringList(_keyExpenses, expenseStrings);
-
-    print('Expense removed from SharedPreferences: $expenseId');
   }
 }

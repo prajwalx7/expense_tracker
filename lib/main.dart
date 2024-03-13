@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          // Set the new theme for the entire app
           theme: newTheme,
           home: const SplashScreen(),
           routes: {'/home': (context) => const Expenses()},
