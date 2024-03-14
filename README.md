@@ -15,14 +15,20 @@ The Expense Tracker App is a user friendly tool designed to help users track the
 - Secure data storage using Shared Preferences to protect sensitive financial information.
 
 # Output
+<div style="display: flex; flex-wrap: wrap;">
+    <img src="assets/images/snapshots/1.png" alt="Image 1" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/2.png" alt="Image 2" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/3.png" alt="Image 3" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/4.png" alt="Image 4" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/5.png" alt="Image 5" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/6.png" alt="Image 6" style="width: 30%; height: auto; margin: 5px;">
+    <img src="assets/images/snapshots/7.png" alt="Image 7" style="width: 30%; height: auto; margin: 5px;">
+</div>
 
-![Alt text](assets/images/snapshots/img1.png)
-![Alt text](assets/images/snapshots/img2.png)
-![Alt text](assets/images/snapshots/img3.png)
-![Alt text](assets/images/snapshots/img4.png)
-![Alt text](assets/images/snapshots/img5.png)
-![Alt text](assets/images/snapshots/img6.png)
-![Alt text](assets/images/snapshots/img7.png)
+
+
+
+
 
 
 
