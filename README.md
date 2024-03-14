@@ -14,6 +14,16 @@ The Expense Tracker App is a user friendly tool designed to help users track the
 - Track expenses on the go with multi-platform compatibility.
 - Secure data storage using Shared Preferences to protect sensitive financial information.
 
+# Output
+
+![Alt text](assets/images/snapshots/img1.png)
+![Alt text](assets/images/snapshots/img2.png)
+![Alt text](assets/images/snapshots/img3.png)
+![Alt text](assets/images/snapshots/img4.png)
+![Alt text](assets/images/snapshots/img5.png)
+![Alt text](assets/images/snapshots/img6.png)
+![Alt text](assets/images/snapshots/img7.png)
+
 
 
 
