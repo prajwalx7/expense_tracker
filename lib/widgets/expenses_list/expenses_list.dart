@@ -2,6 +2,7 @@ import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/widgets/expenses_list/expense_item.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpensesList extends StatefulWidget {
   const ExpensesList({
@@ -35,7 +36,7 @@ class _ExpensesListState extends State<ExpensesList> {
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
           controller: _controller,
-          padding: const EdgeInsets.only(bottom: 80),
+          padding: EdgeInsets.only(bottom: 80.h),
           itemCount: widget.expenses.length,
           itemBuilder: (ctx, index) {
             final reversedIndex = widget.expenses.length - 1 - index;

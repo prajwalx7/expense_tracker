@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpenseCategoryList extends StatelessWidget {
   const ExpenseCategoryList({Key? key}) : super(key: key);
@@ -7,20 +8,20 @@ class ExpenseCategoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 10, right: 20),
+        Padding(
+          padding: EdgeInsets.only(top: 10.h, right: 20.w),
           child: Text(
             "Daily Expenses",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
             ),
           ),
         ),
-        const SizedBox(
-          height: 12,
+        SizedBox(
+          height: 12.h,
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -45,15 +46,15 @@ Widget buildCategoryRow(String category, Color color) {
   return Row(
     children: [
       Container(
-        height: 12,
-        width: 12,
+        height: 12.h,
+        width: 12.w,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: color,
         ),
       ),
-      const SizedBox(
-        width: 5,
+      SizedBox(
+        width: 5.w,
       ),
       Expanded(
         child: Text(

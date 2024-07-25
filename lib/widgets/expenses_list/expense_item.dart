@@ -1,5 +1,6 @@
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem(this.expense, {Key? key}) : super(key: key);
@@ -9,26 +10,26 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 14, left: 10, right: 10, bottom: 12),
+      padding: EdgeInsets.only(top: 14.h, left: 10.w, right: 10.w, bottom: 12.h),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onBackground,
-          borderRadius: BorderRadius.circular(12),
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 50,
-                height: 50,
+                width: 50.w,
+                height: 50.h,
                 child: Image(
                   image: categoryIcons[expense.category] ??
                       const AssetImage("assets/images/shopping.png"),
                 ),
               ),
-              const SizedBox(width: 20), 
+              SizedBox(width: 20.w), 
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,8 +37,8 @@ class ExpenseItem extends StatelessWidget {
                     // titel
                     Text(
                       expense.title,
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style:  TextStyle(
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -45,9 +46,9 @@ class ExpenseItem extends StatelessWidget {
                     Text(
                       // Category name
                       expense.category.toString().split('.').last,
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: 5.h),
                     // amount
                     Text(
                       'Rs ${expense.amount.toStringAsFixed(2)}',
@@ -59,12 +60,12 @@ class ExpenseItem extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(top: 14),
-                width: 80,
+                padding: EdgeInsets.only(top: 14.h),
+                width: 80.w,
                 child: Text(
                   expense.formattedDate,
-                  style: const TextStyle(
-                    fontSize: 12,
+                  style: TextStyle(
+                    fontSize: 12.sp,
                   ),
                 ),
               ),

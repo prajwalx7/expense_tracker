@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ExpenseHistory extends StatefulWidget {
@@ -67,18 +68,18 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense History'),
-        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
+        padding: EdgeInsets.only(left: 10.w, right: 10.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             SizedBox(
-              height: 50,
+              height: 50.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 controller: _dateScrollController,
@@ -86,7 +87,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                 itemBuilder: (context, index) {
                   final date = _dates[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                     child: InkWell(
                       onTap: () {
                         setState(() {
@@ -94,7 +95,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                         });
                       },
                       child: Container(
-                        width: 100,
+                        width: 100.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: _selectedDate.year == date.year &&
@@ -102,7 +103,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                                       _selectedDate.day == date.day
                                   ? Colors.blue
                                   : Colors.grey),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8.0.r),
                         ),
                         alignment: Alignment.center,
                         child: Text(DateFormat('MMM dd').format(date)),
@@ -112,15 +113,15 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 30.h,
             ),
             Expanded(
               child: _getExpensesForDate(_selectedDate).isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No expenses for selected date',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18.sp),
                       ),
                     )
                   : ListView.builder(
@@ -129,30 +130,30 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                         final expense =
                             _getExpensesForDate(_selectedDate)[index];
                         return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0.h),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onBackground,
+                              color: Theme.of(context).colorScheme.onPrimary,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            height: 90,
-                            width: 80,
+                            height: 90.h,
+                            width: 80.w,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15.w, vertical: 10.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    width: 50,
-                                    height: 50,
+                                    width: 50.h,
+                                    height: 50.w,
                                     child: Image(
                                       image: categoryIcons[expense.category] ??
                                           const AssetImage(
                                               "assets/images/shopping.png"),
                                     ),
                                   ),
-                                  const SizedBox(width: 20),
+                                  SizedBox(width: 20.w),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
@@ -161,8 +162,8 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                                         // titel
                                         Text(
                                           expense.title,
-                                          style: const TextStyle(
-                                            fontSize: 18,
+                                          style: TextStyle(
+                                            fontSize: 18.sp,
                                             fontWeight: FontWeight.bold,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -173,10 +174,11 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                                               .toString()
                                               .split('.')
                                               .last,
-                                          style: const TextStyle(
-                                              fontSize: 12, color: Colors.grey),
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: Colors.grey),
                                         ),
-                                        const SizedBox(height: 5),
+                                        SizedBox(height: 5.h),
                                         // amount
                                         Text(
                                           'Rs ${expense.amount.toStringAsFixed(2)}',
@@ -188,12 +190,12 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.only(top: 14),
-                                    width: 80,
+                                    padding: EdgeInsets.only(top: 14.h),
+                                    width: 80.w,
                                     child: Text(
                                       expense.formattedDate,
-                                      style: const TextStyle(
-                                        fontSize: 12,
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                   ),

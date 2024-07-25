@@ -2,6 +2,7 @@ import 'package:expense_tracker/screens/expenses.dart';
 import 'package:expense_tracker/screens/splash_screen.dart';
 import 'package:expense_tracker/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -30,11 +31,14 @@ class MyApp extends StatelessWidget {
           textTheme: newTextTheme,
         );
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: newTheme,
-          home: const SplashScreen(),
-          routes: {'/home': (context) => const Expenses()},
+        return ScreenUtilInit(
+          designSize: const Size(360, 640),
+          builder: (context, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: newTheme,
+            home: const SplashScreen(),
+            routes: {'/home': (context) => const Expenses()},
+          ),
         );
       },
     );

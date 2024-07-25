@@ -1,5 +1,6 @@
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
@@ -51,12 +52,13 @@ class _NewExpenseState extends State<NewExpense> {
           title: Text(
             'Invalid Input',
             style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
                 fontWeight: FontWeight.bold),
           ),
           content: Text(
             'Please make sure a valid title, amount and date was entered.',
-            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimaryContainer),
           ),
           actions: [
             TextButton(
@@ -66,7 +68,7 @@ class _NewExpenseState extends State<NewExpense> {
               child: Text(
                 'Ok',
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     fontWeight: FontWeight.bold),
               ),
             )
@@ -94,10 +96,11 @@ class _NewExpenseState extends State<NewExpense> {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       children: [
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16.r),
           child: Column(
             children: [
               TextField(
+                textInputAction: TextInputAction.next,
                 controller: _titleController,
                 maxLength: 15,
                 decoration: InputDecoration(
@@ -106,16 +109,16 @@ class _NewExpenseState extends State<NewExpense> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.onSecondary),
+                        color: Theme.of(context).colorScheme.onTertiary),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.onSecondary),
+                        color: Theme.of(context).colorScheme.onTertiary),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
 
               //*****************amount and date**************
@@ -134,25 +137,26 @@ class _NewExpenseState extends State<NewExpense> {
                         prefixStyle: const TextStyle(),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.onSecondary),
+                              color: Theme.of(context).colorScheme.onTertiary),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.onSecondary),
+                              color: Theme.of(context).colorScheme.onTertiary),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 12,
+                  SizedBox(
+                    width: 12.w,
                   ),
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 4, vertical: 7),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                          borderRadius: BorderRadius.circular(4.r),
+                          border: Border.all(
+                              color: Theme.of(context).colorScheme.onTertiary)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -174,8 +178,8 @@ class _NewExpenseState extends State<NewExpense> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: 15.h,
               ),
               // ***************Dropdownbuttons******************
               Column(
@@ -183,12 +187,14 @@ class _NewExpenseState extends State<NewExpense> {
                 children: [
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.h),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
+                        borderRadius: BorderRadius.circular(4.r),
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.onTertiary)),
                     child: DropdownButton(
-                      dropdownColor: Theme.of(context).colorScheme.onPrimary,
+                      dropdownColor:
+                          Theme.of(context).colorScheme.onPrimaryContainer,
                       value: _selectedCategory,
                       items: Category.values
                           .map(
@@ -213,46 +219,56 @@ class _NewExpenseState extends State<NewExpense> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 270,
+                  SizedBox(
+                    height: 140.h,
                   ),
 
                   // buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 65, vertical: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0.0,
+                            side: BorderSide(
+                                color: Theme.of(context).colorScheme.primary),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50.w, vertical: 15.h),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(fontSize: 16.sp),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text(
-                          'Cancel',
+                        SizedBox(width: 10.w),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 35.w, vertical: 15.h),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.onTertiary,
+                          ),
+                          onPressed: () {
+                            _submitExpenseData();
+                          },
+                          child: Text(
+                            'Save Expense',
+                            style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onPrimary),
+                          ),
                         ),
-                      ),
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.onSecondary,
-                          side: BorderSide(
-                              color: Theme.of(context).colorScheme.onSecondary),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 20),
-                        ),
-                        onPressed: () {
-                          _submitExpenseData();
-                        },
-                        child: Text(
-                          'Save Expense',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onPrimary),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               )

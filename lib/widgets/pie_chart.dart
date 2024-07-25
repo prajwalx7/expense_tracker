@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyPieChart extends StatelessWidget {
   const MyPieChart({Key? key, required this.expenses}) : super(key: key);
@@ -40,19 +41,19 @@ class MyPieChart extends StatelessWidget {
         showTitle: true,
         title: '${percentage.toStringAsFixed(0)}%',
         radius: 40,
-        titleStyle: const TextStyle(fontSize: 10, color: Colors.black),
+        titleStyle: TextStyle(fontSize: 10.sp, color: Colors.black),
       );
     }).toList();
 
     return SizedBox(
-      height: 200,
-      width: 200,
+      height: 200.h,
+      width: 200.w,
       child: Stack(
         children: [
           Center(
             child: SizedBox(
-              height: 180,
-              width: 180,
+              height: 180.h,
+              width: 180.w,
               child: Stack(
                 children: [
                   Container(
@@ -62,8 +63,8 @@ class MyPieChart extends StatelessWidget {
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
-                          currentTheme.colorScheme.onBackground,
-                          currentTheme.colorScheme.onBackground,
+                          currentTheme.colorScheme.onPrimaryContainer,
+                          currentTheme.colorScheme.onPrimaryContainer,
                         ],
                       ),
                       boxShadow: [
@@ -84,8 +85,8 @@ class MyPieChart extends StatelessWidget {
                   ),
                   Center(
                     child: SizedBox(
-                      height: 180,
-                      width: 180,
+                      height: 180.h,
+                      width: 180.w,
                       child: PieChart(
                         swapAnimationDuration:
                             const Duration(milliseconds: 300),
@@ -103,11 +104,11 @@ class MyPieChart extends StatelessWidget {
           Center(
             // inner circle
             child: Container(
-              height: 100,
-              width: 100,
+              height: 100.h,
+              width: 100.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: currentTheme.colorScheme.onBackground,
+                color: currentTheme.colorScheme.onPrimaryContainer,
                 boxShadow: [
                   BoxShadow(
                     color: shadowColor,
@@ -127,7 +128,7 @@ class MyPieChart extends StatelessWidget {
                 child: Text(
                   'Rs $totalExpense',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: currentTheme.colorScheme.onTertiary,
                   ),

@@ -7,6 +7,7 @@ import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/widgets/pie_chart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class Expenses extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _onadd() {
     showModalBottomSheet(
-      backgroundColor: Theme.of(context).colorScheme.onBackground,
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       isScrollControlled: true,
       enableDrag: true,
       context: context,
@@ -46,7 +47,7 @@ class _ExpensesState extends State<Expenses> {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.6,
           child: NewExpense(
             onAddExpense: _addExpense,
           ),
@@ -58,9 +59,9 @@ class _ExpensesState extends State<Expenses> {
   void _addExpense(ExpenseModel expense) {
     _registeredExpenses.add(expense);
     _expenseStorage.saveExpense(expense).then((_) {
-      print('Expense saved successfully:');
+      // print('Expense saved successfully:');
     }).catchError((error) {
-      print('Error saving expense: $error');
+      // print('Error saving expense: $error');
     });
     setState(() {});
   }
@@ -88,7 +89,7 @@ class _ExpensesState extends State<Expenses> {
       ),
     );
 
-    print('Expense removed from _registeredExpenses: $_registeredExpenses');
+    // print('Expense removed from _registeredExpenses: $_registeredExpenses');
   }
 
   @override
@@ -99,40 +100,40 @@ class _ExpensesState extends State<Expenses> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
-                      radius: 30,
+                    CircleAvatar(
+                      radius: 30.r,
                       backgroundImage: AssetImage("assets/images/avatar.jpeg"),
                     ),
-                    const SizedBox(width: 10),
-                    const Expanded(
+                    SizedBox(width: 10.w),
+                    Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(top: 8.0),
+                        padding: EdgeInsets.only(top: 8.0.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Welcome Back!",
-                              style: TextStyle(fontSize: 15),
+                              style: TextStyle(fontSize: 15.sp),
                             ),
                             Text(
                               "Prajwal Dudhatkar",
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 18.sp),
                             ),
                           ],
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
                       child: IconButton(
-                        iconSize: 30,
+                        iconSize: 30.sp,
                         onPressed: () {
                           Provider.of<ThemeProvider>(context, listen: false)
                               .toggleTheme();
@@ -150,91 +151,95 @@ class _ExpensesState extends State<Expenses> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 240,
-                      width: 390,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onBackground,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            children: [
-                              const Expanded(
-                                child: ExpenseCategoryList(),
-                              ),
-                              MyPieChart(
-                                expenses: _registeredExpenses,
-                              ),
-                            ],
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 180.h,
+                        width: double.infinity,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(15.r),
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  child: ExpenseCategoryList(),
+                                ),
+                                MyPieChart(
+                                  expenses: _registeredExpenses,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: Row(
-                        children: [
-                          const Text(
-                            "Recent Activity",
-                            style: TextStyle(
-                              fontSize: 18,
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 18.0.w),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Recent Activity",
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 25.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ExpenseHistory(
-                                        expenses: _registeredExpenses),
+                            const Spacer(),
+                            Padding(
+                              padding: EdgeInsets.only(right: 25.0.w),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ExpenseHistory(
+                                          expenses: _registeredExpenses),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 5.h),
+                                    minimumSize: Size(70.w, 10.h),
+                                    elevation: 0,
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary),
+                                child: Text(
+                                  "view all",
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
                                   ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  minimumSize: const Size(70, 10),
-                                  elevation: 0,
-                                  backgroundColor:
-                                      Theme.of(context).colorScheme.onPrimary),
-                              child: const Text(
-                                "view all",
-                                style: TextStyle(
-                                  fontSize: 15,
                                 ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    _registeredExpenses.isEmpty
-                        ? const Padding(
-                            padding: EdgeInsets.only(top: 180),
-                            child: Text(
-                              "No data available",
-                              style: TextStyle(fontSize: 16),
+                      _registeredExpenses.isEmpty
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 100.h),
+                              child: Text(
+                                "No data available",
+                                style: TextStyle(fontSize: 16.sp),
+                              ),
+                            )
+                          : ExpensesList(
+                              expenses: _registeredExpenses,
+                              onRemoveExpense: _removeExpense,
                             ),
-                          )
-                        : ExpensesList(
-                            expenses: _registeredExpenses,
-                            onRemoveExpense: _removeExpense,
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -242,15 +247,15 @@ class _ExpensesState extends State<Expenses> {
         ),
       ),
       floatingActionButton: Container(
-        margin: const EdgeInsets.only(right: 10),
+        margin: EdgeInsets.only(right: 10.w),
         child: FloatingActionButton(
           onPressed: _onadd,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30.r),
           ),
           child: Icon(
             Icons.add,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
       ),
