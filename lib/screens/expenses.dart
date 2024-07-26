@@ -24,15 +24,14 @@ class _ExpensesState extends State<Expenses> {
   @override
   void initState() {
     super.initState();
-    _expenseStorage = ExpenseStorage(); // Initialize expense store
-    _loadExpenses(); // Load expenses when the widget initialise
+    _expenseStorage = ExpenseStorage();
+    _loadExpenses();
   }
 
   void _loadExpenses() async {
     List<ExpenseModel> expenses = await _expenseStorage.loadExpenses();
     setState(() {
-      _registeredExpenses
-          .addAll(expenses); // Add loaded expenses to _registeredExpenses
+      _registeredExpenses.addAll(expenses);
     });
   }
 
@@ -57,13 +56,10 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _addExpense(ExpenseModel expense) {
-    _registeredExpenses.add(expense);
-    _expenseStorage.saveExpense(expense).then((_) {
-      // print('Expense saved successfully:');
-    }).catchError((error) {
-      // print('Error saving expense: $error');
+    setState(() {
+      _registeredExpenses.add(expense);
     });
-    setState(() {});
+    _expenseStorage.saveExpense(expense);
   }
 
   void _removeExpense(ExpenseModel expense) {
@@ -88,8 +84,6 @@ class _ExpensesState extends State<Expenses> {
         ),
       ),
     );
-
-    // print('Expense removed from _registeredExpenses: $_registeredExpenses');
   }
 
   @override
@@ -99,148 +93,142 @@ class _ExpensesState extends State<Expenses> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 30.r,
-                      backgroundImage: AssetImage("assets/images/avatar.jpeg"),
-                    ),
-                    SizedBox(width: 10.w),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 8.0.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Welcome Back!",
-                              style: TextStyle(fontSize: 15.sp),
-                            ),
-                            Text(
-                              "Prajwal Dudhatkar",
-                              style: TextStyle(fontSize: 18.sp),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      child: IconButton(
-                        iconSize: 30.sp,
-                        onPressed: () {
-                          Provider.of<ThemeProvider>(context, listen: false)
-                              .toggleTheme();
-                        },
-                        icon: Icon(
-                          Theme.of(context).brightness == Brightness.light
-                              ? Icons.dark_mode_outlined
-                              : Icons.light_mode_outlined,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                  child: Column(
+            // Upper part (non-scrollable)
+            Column(
+              children: [
+                // Header with avatar, welcome text, and theme toggle
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 180.h,
-                        width: double.infinity,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(15.r),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  child: ExpenseCategoryList(),
-                                ),
-                                MyPieChart(
-                                  expenses: _registeredExpenses,
-                                ),
-                              ],
-                            ),
+                      CircleAvatar(
+                        radius: 30.r,
+                        backgroundImage:
+                            const AssetImage("assets/images/avatar.jpeg"),
+                      ),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 8.0.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Welcome Back!",
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
+                              Text(
+                                "Prajwal Dudhatkar",
+                                style: TextStyle(fontSize: 18.sp),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10.h,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 18.0.w),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Recent Activity",
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                            const Spacer(),
-                            Padding(
-                              padding: EdgeInsets.only(right: 25.0.w),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ExpenseHistory(
-                                          expenses: _registeredExpenses),
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5.w, vertical: 5.h),
-                                    minimumSize: Size(70.w, 10.h),
-                                    elevation: 0,
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary),
-                                child: Text(
-                                  "view all",
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
+                        child: IconButton(
+                          iconSize: 30.sp,
+                          onPressed: () {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .toggleTheme();
+                          },
+                          icon: Icon(
+                            Theme.of(context).brightness == Brightness.light
+                                ? Icons.dark_mode_outlined
+                                : Icons.light_mode_outlined,
+                          ),
                         ),
                       ),
-                      _registeredExpenses.isEmpty
-                          ? Padding(
-                              padding: EdgeInsets.only(top: 100.h),
-                              child: Text(
-                                "No data available",
-                                style: TextStyle(fontSize: 16.sp),
-                              ),
-                            )
-                          : ExpensesList(
-                              expenses: _registeredExpenses,
-                              onRemoveExpense: _removeExpense,
-                            ),
                     ],
                   ),
                 ),
+                // Expense category and pie chart
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: SizedBox(
+                    height: 180.h,
+                    width: double.infinity,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(15.r),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              child: ExpenseCategoryList(),
+                            ),
+                            MyPieChart(
+                              expenses: _registeredExpenses,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+              ],
+            ),
+            // Recent Activity row
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0.w),
+              child: Row(
+                children: [
+                  Text(
+                    "Recent Activity",
+                    style: TextStyle(fontSize: 18.sp),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ExpenseHistory(expenses: _registeredExpenses),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+                      minimumSize: Size(70.w, 10.h),
+                      elevation: 0,
+                      backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    child: Text(
+                      "view all",
+                      style: TextStyle(fontSize: 15.sp),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Lower part (scrollable list)
+            Expanded(
+              child: SingleChildScrollView(
+                child: _registeredExpenses.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.only(top: 100.h),
+                        child: Text(
+                          "No data available",
+                          style: TextStyle(fontSize: 16.sp),
+                        ),
+                      )
+                    : ExpensesList(
+                        expenses: _registeredExpenses,
+                        onRemoveExpense: _removeExpense,
+                      ),
               ),
             ),
           ],

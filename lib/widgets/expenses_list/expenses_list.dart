@@ -36,7 +36,7 @@ class _ExpensesListState extends State<ExpensesList> {
         gradientFractionOnStart: 0.08,
         child: ListView.builder(
           controller: _controller,
-          padding: EdgeInsets.only(bottom: 80.h),
+          padding: EdgeInsets.only(bottom: 90.h),
           itemCount: widget.expenses.length,
           itemBuilder: (ctx, index) {
             final reversedIndex = widget.expenses.length - 1 - index;

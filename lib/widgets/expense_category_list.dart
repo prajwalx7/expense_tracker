@@ -9,11 +9,11 @@ class ExpenseCategoryList extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 10.h, right: 20.w),
+          padding: EdgeInsets.only(top: 10.h, right: 10.w),
           child: Text(
             "Daily Expenses",
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 16.sp,
             ),
           ),
         ),

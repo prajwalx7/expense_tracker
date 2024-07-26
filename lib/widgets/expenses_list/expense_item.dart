@@ -10,7 +10,8 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 14.h, left: 10.w, right: 10.w, bottom: 12.h),
+      padding:
+          EdgeInsets.only(top: 14.h, left: 10.w, right: 10.w, bottom: 12.h),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -29,7 +30,7 @@ class ExpenseItem extends StatelessWidget {
                       const AssetImage("assets/images/shopping.png"),
                 ),
               ),
-              SizedBox(width: 20.w), 
+              SizedBox(width: 20.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +38,7 @@ class ExpenseItem extends StatelessWidget {
                     // titel
                     Text(
                       expense.title,
-                      style:  TextStyle(
+                      style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
@@ -61,7 +62,6 @@ class ExpenseItem extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(top: 14.h),
-                width: 80.w,
                 child: Text(
                   expense.formattedDate,
                   style: TextStyle(
