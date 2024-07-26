@@ -79,7 +79,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
               height: 30.h,
             ),
             SizedBox(
-              height: 50.h,
+              height: 30.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 controller: _dateScrollController,
@@ -87,7 +87,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                 itemBuilder: (context, index) {
                   final date = _dates[index];
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: InkWell(
                       onTap: () {
                         setState(() {
@@ -95,7 +95,7 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                         });
                       },
                       child: Container(
-                        width: 100.w,
+                        width: 70.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: _selectedDate.year == date.year &&
@@ -130,17 +130,18 @@ class ExpenseHistoryState extends State<ExpenseHistory> {
                         final expense =
                             _getExpensesForDate(_selectedDate)[index];
                         return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 8.h),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.onPrimary,
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            height: 90.h,
+                            height: 70.h,
                             width: 80.w,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 15.w, vertical: 10.h),
+                                  horizontal: 10.w, vertical: 8.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

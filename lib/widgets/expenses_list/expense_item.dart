@@ -10,15 +10,14 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(top: 14.h, left: 10.w, right: 10.w, bottom: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimaryContainer,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

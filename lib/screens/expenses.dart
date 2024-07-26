@@ -93,10 +93,8 @@ class _ExpensesState extends State<Expenses> {
       body: SafeArea(
         child: Column(
           children: [
-            // Upper part (non-scrollable)
             Column(
               children: [
-                // Header with avatar, welcome text, and theme toggle
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
